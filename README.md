@@ -5,7 +5,7 @@
 
 This guide outlines code style and best practices for writing Python code, particularly suited for open-source machine learning projects on GitHub. It is intended as a reference for both writing and reviewing Python code.
 
-While specific rules can be subjective, this guide is based on widely accepted authorities in the Python community, including PEP8, principles from "Clean Code," and Google's Python Style Guide. Remember to use your best judgment, as there are sometimes good reasons for breaking rules. Consistency is paramount: if you're editing existing code, adopt its style, but also consider converging on newer, beneficial styles over time.
+While specific rules can be subjective, this guide is based on widely accepted authorities in the Python community, including PEP8, principles from "Clean Code". Remember to use your best judgment, as there are sometimes good reasons for breaking rules. Consistency is paramount: if you're editing existing code, adopt its style, but also consider converging on newer, beneficial styles over time.
 
 ### 1. General Principles
 
@@ -17,7 +17,6 @@ While specific rules can be subjective, this guide is based on widely accepted a
     *   **Description:** `flake8` helps ensure PEP8 compliance, and `pylint` finds bugs and style issues. Consider running them as part of your CI chain.
     *   **Good:** Running `flake8` in your editor or CI to check for PEP8 compliance.
     *   **Bad:** Ignoring linter warnings without suppression or explanation.
-*   **Python 3:** Always write Python 3 code unless dealing with legacy systems.
 
 ### 2. Commenting
 
@@ -43,7 +42,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
 *   **Formatting:** Comments should start at least 2 spaces away from the code with `#`, followed by at least one space before the text.
 *   **TODO Comments:** Use `TODO` comments for temporary code or short-term solutions. They should begin with `TODO:`, a colon, a link to context (like a bug reference), and an explanatory string introduced with a hyphen.
     *   **Good:** `# TODO: crbug.com/192795 - Investigate cpufreq optimizations.`
-    *   **Bad:** `# TODO(yourusername): Use a "* " here for concatenation operator.`
+    *   **Bad:** `# TODO(youremailaddress): Use a "* " here for concatenation operator.`
 
 ### 3. Docstrings
 
