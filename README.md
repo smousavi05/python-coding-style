@@ -1,6 +1,3 @@
-# python-coding-style
-
-Here is a Python style guide:
 
 ***
 
