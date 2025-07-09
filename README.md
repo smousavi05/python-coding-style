@@ -1,10 +1,10 @@
 # python-coding-style
 
-Here is a Python style guide for sharing open-source machine learning code on GitHub, drawing on the provided sources and incorporating general software engineering best practices:
+Here is a Python style guide:
 
 ***
 
-## Python Style Guide for Open-Source Machine Learning on GitHub
+## Python Style Guide
 
 This guide outlines code style and best practices for writing Python code, particularly suited for open-source machine learning projects on GitHub. It is intended as a reference for both writing and reviewing Python code.
 
