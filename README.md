@@ -13,7 +13,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
 *   **Readability:** Prioritize clear, understandable code over extreme conciseness.
 *   **Linters:** Use linters like `flake8` or `pylint` to ensure code follows style guidelines and to catch common errors.
     *   **Description:** `flake8` helps ensure PEP8 compliance, and `pylint` finds bugs and style issues. Consider running them as part of your CI chain.
-    *   **Good:** Running `flake8` in your editor or CI to check for PEP8 compliance.
+    *   **Good:** Running `flake8` in your editor to check for PEP8 compliance.
     *   **Bad:** Ignoring linter warnings without suppression or explanation.
 
 ### 2. Commenting
