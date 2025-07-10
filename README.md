@@ -267,7 +267,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
         ```
        
 *   **Virtual Environments:** Use virtual environments (e.g., `venv`, `virtualenv`, `Poetry`, `Pipenv`) to isolate project dependencies. `Poetry` and `Pipenv` offer virtual environment support and deterministic dependency management, which is beneficial for reproducible ML environments.
-*   **Packaging:** Consider packaging your project as an installable Python package if it's a library or provides CLI tools. Use `pyproject.toml` for modern packaging. Use semantic versioning (`MAJOR.MINOR.PATCH`) for libraries.
+*   **Packaging:** Consider packaging your project as an installable Python package if it's a library. Use `pyproject.toml` for modern packaging. Use semantic versioning (`MAJOR.MINOR.PATCH`) for libraries.
 *   **Function Length:** Prefer small, focused functions. If a function exceeds about 40 lines, consider breaking it into smaller, more manageable pieces.
 *   **`if __name__ == '__main__':`:** Ensure your main functionality is in a `main()` function and executed only when the script is run directly, not when imported as a module.
     *   **Good:**
@@ -283,7 +283,6 @@ While specific rules can be subjective, this guide is based on widely accepted a
 
 
     *   **Comprehensions & Generator Expressions:** Okay to use for simple cases.
-*   **Packaging:** Consider packaging your project as an installable Python package if it's a library or provides CLI tools. Use `pyproject.toml` for modern packaging. Use semantic versioning (`MAJOR.MINOR.PATCH`) for libraries.
 *   List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, map(), filter(), or lambda.
     *   **Good:**
        ```result = [mapping_expr for value in iterable if filter_expr]
