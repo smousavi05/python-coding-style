@@ -371,3 +371,84 @@ While specific rules can be subjective, this guide is based on widely accepted a
            def f(x=None):
              x = x or []
         ```
+
+*   **Functions and Methods:** In this section, "function" means a method, function, generator, or property.
+
+      A docstring is mandatory for every function that has one or more of the following properties:
+      
+      being part of the public API
+      nontrivial size
+      non-obvious logic
+      A docstring should give enough information to write a call to the function without reading the function's code. The docstring should describe the function's calling syntax and its semantics, but generally not its implementation details, unless those details are relevant to how the function is to be used. For example, a function that mutates one of its arguments as a side effect should note that in its docstring. Otherwise, subtle but important details of a function's implementation that are not relevant to the caller are better expressed as comments alongside the code than within the function's docstring.
+      
+      The docstring may be descriptive-style ("""Fetches rows from a Bigtable.""") or imperative-style ("""Fetch rows from a Bigtable."""), but the style should be consistent within a file. The docstring for a @property data descriptor should use the same style as the docstring for an attribute or a function argument ("""The Bigtable path.""", rather than """Returns the Bigtable path.""").
+      
+      Certain aspects of a function should be documented in special sections, listed below. Each section begins with a heading line, which ends with a colon. All sections other than the heading should maintain a hanging indent of two or four spaces (be consistent within a file). These sections can be omitted in cases where the function's name and signature are informative enough that it can be aptly described using a one-line docstring.
+      
+      Args:
+      List each parameter by name. A description should follow the name, and be separated by a colon followed by either a space or newline. If the description is too long to fit on a single 80-character line, use a hanging indent of 2 or 4 spaces more than the parameter name (be consistent with the rest of the docstrings in the file). The description should include required type(s) if the code does not contain a corresponding type annotation. If a function accepts *foo (variable length argument lists) and/or **bar (arbitrary keyword arguments), they should be listed as *foo and **bar.
+      Returns: (or Yields: for generators)
+      Describe the semantics of the return value, including any type information that the type annotation does not provide. If the function only returns None, this section is not required. It may also be omitted if the docstring starts with "Return", "Returns", "Yield", or "Yields" (e.g. """Returns row from Bigtable as a tuple of strings.""") and the opening sentence is sufficient to describe the return value. Do not imitate older 'NumPy style' (example), which frequently documented a tuple return value as if it were multiple return values with individual names (never mentioning the tuple). Instead, describe such a return value as: "Returns: A tuple (mat_a, mat_b), where mat_a is ..., and ...". The auxiliary names in the docstring need not necessarily correspond to any internal names used in the function body (as those are not part of the API). If the function uses yield (is a generator), the Yields: section should document the object returned by next(), instead of the generator object itself that the call evaluates to.
+      Raises:
+      List all exceptions that are relevant to the interface followed by a description. Use a similar exception name + colon + space or newline and hanging indent style as described in Args:. You should not document exceptions that get raised if the API specified in the docstring is violated (because this would paradoxically make behavior under violation of the API part of the API).
+    *   **Good:**
+         ```def fetch_smalltable_rows(
+                table_handle: smalltable.Table,
+                keys: Sequence[bytes | str],
+                require_all_keys: bool = False,
+            ) -> Mapping[bytes, tuple[str, ...]]:
+              """Fetches rows from a Smalltable.
+            
+              Retrieves rows pertaining to the given keys from the Table instance
+              represented by table_handle.  String keys will be UTF-8 encoded.
+            
+              Args:
+                table_handle: An open smalltable.Table instance.
+                keys: A sequence of strings representing the key of each table
+                  row to fetch.  String keys will be UTF-8 encoded.
+                require_all_keys: If True only rows with values set for all keys will be
+                  returned.
+            
+              Returns:
+                A dict mapping keys to the corresponding table row data
+                fetched. Each row is represented as a tuple of strings. For
+                example:
+            
+                {b'Serak': ('Rigel VII', 'Preparer'),
+                 b'Zim': ('Irk', 'Invader'),
+                 b'Lrrr': ('Omicron Persei 8', 'Emperor')}
+            
+                Returned keys are always bytes.  If a key from the keys argument is
+                missing from the dictionary, then that row was not found in the
+                table (and require_all_keys must have been False).
+            
+              Raises:
+                IOError: An error occurred accessing the smalltable.
+            """
+        ```
+
+        ```from typing import override
+
+            class Parent:
+              def do_something(self):
+                """Parent method, includes docstring."""
+            
+            # Child class, method annotated with override.
+            class Child(Parent):
+              @override
+              def do_something(self):
+                pass
+        ```    
+    *   **Bad:**
+        ```# Child class, but without @override decorator, a docstring is required.
+            class Child(Parent):
+              def do_something(self):
+                pass
+            
+            # Docstring is trivial, @override is sufficient to indicate that docs can be
+            # found in the base class.
+            class Child(Parent):
+              @override
+              def do_something(self):
+                """See base class."""
+        ```
