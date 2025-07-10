@@ -282,8 +282,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
     *   **Bad:** Top-level code that executes immediately upon import, potentially causing side effects when the module is imported by other scripts or tools.
 
 
-    *   **Comprehensions & Generator Expressions:** Okay to use for simple cases.
-*   List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, map(), filter(), or lambda.
+*    **Comprehensions & Generator Expressions:** Okay to use for simple cases. List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, map(), filter(), or lambda.
     *   **Good:**
        ```result = [mapping_expr for value in iterable if filter_expr]
 
