@@ -166,20 +166,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
 *   **Developer Responsibility:** The developer implementing a feature is responsible for adequate test coverage of new and changed code.
 *   **CI Integration:** Integrate test coverage services (like `codecov` or `coveralls`) into your CI chain.
 *   **Naming:** For new unit test files, follow PEP 8 compliant `lower_with_under` method names, e.g., `test_<method_under_test>_<state>`.
-*   **Names to Avoid:** single character names, except for specifically allowed cases:
-    *   counters or iterators (e.g. i, j, k, v, et al.).
-    *   e as an exception identifier in try/except statements.
-    *   f as a file handle in with statements
-    *   private type variables with no constraints (e.g. _T = TypeVar("_T"), _P = ParamSpec("_P"))
-    *   names that match established notation in a reference paper or algorithm (see Mathematical Notation)
-    
-    Please be mindful not to abuse single-character naming. Generally speaking, descriptiveness should be proportional to the name's scope of visibility. For example, i might be a fine name for 5-line code block but within multiple nested scopes, it is likely too vague.
-   
-   *   dashes (-) in any package/module name
-   *   __double_leading_and_trailing_underscore__ names (reserved by Python)
-   *   offensive terms, for example in go/respectful-code-existing-systems
-   *   names that needlessly include the type of the variable (for example: id_to_name_dict)
-       
+
 ### 6. Other Best Practices
 
 *   **Line Length:** Maximum line length is 80 characters, with explicit exceptions for long imports, URLs, or pylint disable comments. Use Python’s implicit line joining with parentheses, brackets, or braces instead of backslashes for continuation.
@@ -193,6 +180,28 @@ While specific rules can be subjective, this guide is based on widely accepted a
     *   **Internal Symbols:** Prefix with a single underscore (`_`).
     *   **Good:** `days_between_events` instead of `number_of_days_between_events` (too long) or `dbe` (not descriptive).
     *   **Bad:** `models.UserModel` (redundant naming if the module is `models`).
+
+*   **Naming:** module_name, package_name, ClassName, method_name, ExceptionName, function_name, GLOBAL_CONSTANT_NAME, global_var_name, instance_var_name, function_parameter_name, local_var_name, query_proper_noun_for_thing, send_acronym_via_https.
+    *   New Python files use PEP 8 compliant lower_with_under function and method names, including lowercase proper nouns. MethodName and FunctionName are also allowed for consistency(*) in legacy files.
+    *   Names should be descriptive. This includes functions, classes, variables, attributes, files and any other type of named entities.
+    *   Avoid abbreviation. In particular, do not use abbreviations that are ambiguous or unfamiliar to readers outside your project, and do not abbreviate by deleting letters within a word.
+    *   Always use a .py filename extension. Never use dashes.
+   
+*   **Names to Avoid:** single character names, except for specifically allowed cases:
+    *   counters or iterators (e.g. i, j, k, v, et al.).
+    *   e as an exception identifier in try/except statements.
+    *   f as a file handle in with statements
+    *   private type variables with no constraints (e.g. _T = TypeVar("_T"), _P = ParamSpec("_P"))
+    *   names that match established notation in a reference paper or algorithm (see Mathematical Notation)
+    
+    Please be mindful not to abuse single-character naming. Generally speaking, descriptiveness should be proportional to the name's scope of visibility. For example, i might be a fine name for 5-line code block but within multiple nested scopes, it is likely too vague.
+   
+   *   dashes (-) in any package/module name
+   *   __double_leading_and_trailing_underscore__ names (reserved by Python)
+   *   offensive terms, for example in go/respectful-code-existing-systems
+   *   names that needlessly include the type of the variable (for example: id_to_name_dict)
+
+      
 *   **Exceptions and Error Handling:**
     *   **Use Exceptions:** Python's error handling is built around exceptions; use them to indicate invalid states that cannot be recovered from.
     *   **Custom Exceptions:** Define your own exceptions by inheriting from existing ones when useful, especially to abstract low-level errors.
