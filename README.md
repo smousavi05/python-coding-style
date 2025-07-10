@@ -3,8 +3,6 @@
 
 ## Python Style Guide
 
-This guide outlines code style and best practices for writing Python code, particularly suited for open-source machine learning projects on GitHub. It is intended as a reference for both writing and reviewing Python code.
-
 While specific rules can be subjective, this guide is based on widely accepted authorities in the Python community, including PEP8, principles from "Clean Code". Remember to use your best judgment, as there are sometimes good reasons for breaking rules. Consistency is paramount: if you're editing existing code, adopt its style, but also consider converging on newer, beneficial styles over time.
 
 ### 1. General Principles
