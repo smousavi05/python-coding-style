@@ -329,6 +329,7 @@ While specific rules can be subjective, this guide is based on widely accepted a
       ```
 
 *   **Default Iterators and Operators:** Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.
+
     *   **Good:**
          ```for key in adict: ...
             if obj in alist: ...
@@ -372,3 +373,32 @@ While specific rules can be subjective, this guide is based on widely accepted a
              x = x or []
         ```
 
+*   **Logging:** For logging functions that expect a pattern-string (with %-placeholders) as their first argument: Always call them with a string literal (not an f-string!) as their first argument with pattern-parameters as subsequent arguments. Some logging implementations collect the unexpanded pattern-string as a queryable field. It also prevents spending time rendering a message that no logger is configured to output.
+    *   **Good:** 
+        ```import tensorflow as tf
+           logger = tf.get_logger()
+           logger.info('TensorFlow Version is: %s', tf.__version__)
+        ```
+       
+    *   **Good:**
+        ```import os
+           from absl import logging
+         
+           logging.info('Current $PAGER is: %s', os.getenv('PAGER', default=''))
+         
+           homedir = os.getenv('HOME')
+           if homedir is None or not os.access(homedir, os.W_OK):
+             logging.error('Cannot write to home directory, $HOME=%r', homedir)
+        ```
+       
+    *   **Bad:**
+        ```import os
+           from absl import logging
+         
+           logging.info('Current $PAGER is:')
+           logging.info(os.getenv('PAGER', default=''))
+         
+           homedir = os.getenv('HOME')
+           if homedir is None or not os.access(homedir, os.W_OK):
+             logging.error(f'Cannot write to home directory, $HOME={homedir!r}')
+        ```
