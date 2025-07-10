@@ -402,3 +402,45 @@ While specific rules can be subjective, this guide is based on widely accepted a
            if homedir is None or not os.access(homedir, os.W_OK):
              logging.error(f'Cannot write to home directory, $HOME={homedir!r}')
         ```
+
+*   **Error Messages:** Error messages (such as: message strings on exceptions like ValueError, or messages shown to the user) should follow three guidelines:
+
+      The message needs to precisely match the actual error condition.
+      
+      Interpolated pieces need to always be clearly identifiable as such.
+      
+      They should allow simple automated processing (e.g. grepping).
+       
+    *   **Good:**
+        ```if not 0 <= p <= 1:
+             raise ValueError(f'Not a probability: {p=}')
+
+           try:
+             os.rmdir(workdir)
+           except OSError as error:
+             logging.warning('Could not remove directory (reason: %r): %r',
+                    error, workdir)
+        ```
+       
+    *   **Bad:**
+        ```if p < 0 or p > 1:  # PROBLEM: also false for float('nan')!
+             raise ValueError(f'Not a probability: {p=}')
+         
+           try:
+             os.rmdir(workdir)
+           except OSError:
+             # PROBLEM: Message makes an assumption that might not be true:
+             # Deletion might have failed for some other reason, misleading
+             # whoever has to debug this.
+             logging.warning('Directory already was deleted: %s', workdir)
+         
+           try:
+             os.rmdir(workdir)
+           except OSError:
+             # PROBLEM: The message is harder to grep for than necessary, and
+             # not universally non-confusing for all possible values of `workdir`.
+             # Imagine someone calling a library function with such code
+             # using a name such as workdir = 'deleted'. The warning would read:
+             # "The deleted directory could not be deleted."
+             logging.warning('The %s directory could not be deleted.', workdir)
+        ```
