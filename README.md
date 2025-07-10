@@ -166,7 +166,20 @@ While specific rules can be subjective, this guide is based on widely accepted a
 *   **Developer Responsibility:** The developer implementing a feature is responsible for adequate test coverage of new and changed code.
 *   **CI Integration:** Integrate test coverage services (like `codecov` or `coveralls`) into your CI chain.
 *   **Naming:** For new unit test files, follow PEP 8 compliant `lower_with_under` method names, e.g., `test_<method_under_test>_<state>`.
-
+*   **Names to Avoid:** single character names, except for specifically allowed cases:
+    *   counters or iterators (e.g. i, j, k, v, et al.).
+    *   e as an exception identifier in try/except statements.
+    *   f as a file handle in with statements
+    *   private type variables with no constraints (e.g. _T = TypeVar("_T"), _P = ParamSpec("_P"))
+    *   names that match established notation in a reference paper or algorithm (see Mathematical Notation)
+    
+    Please be mindful not to abuse single-character naming. Generally speaking, descriptiveness should be proportional to the name's scope of visibility. For example, i might be a fine name for 5-line code block but within multiple nested scopes, it is likely too vague.
+   
+   *   dashes (-) in any package/module name
+   *   __double_leading_and_trailing_underscore__ names (reserved by Python)
+   *   offensive terms, for example in go/respectful-code-existing-systems
+   *   names that needlessly include the type of the variable (for example: id_to_name_dict)
+       
 ### 6. Other Best Practices
 
 *   **Line Length:** Maximum line length is 80 characters, with explicit exceptions for long imports, URLs, or pylint disable comments. Use Python’s implicit line joining with parentheses, brackets, or braces instead of backslashes for continuation.
