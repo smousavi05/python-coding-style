@@ -303,52 +303,52 @@ While specific rules can be subjective, this guide is based on widely accepted a
 
 
 *    **Comprehensions & Generator Expressions:** Okay to use for simple cases. List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, map(), filter(), or lambda.
+  
     *   **Good:**
-       ```python
-       result = [mapping_expr for value in iterable if filter_expr]
-
-        result = [
-         is_valid(metric={'key': value})
-         for value in interesting_iterable
-         if a_longer_filter_expression(value)
-        ]
-   
-        descriptive_name = [
-         transform({'key': key, 'value': value}, color='black')
-         for key, value in generate_iterable(some_input)
-         if complicated_condition_is_met(key, value)
-        ]
-   
-        result = []
-        for x in range(10):
-          for y in range(5):
-            if x * y > 10:
-              result.append((x, y))
+         ```python
+            result = [mapping_expr for value in iterable if filter_expr]
       
-        return {
-            x: complicated_transform(x)
-            for x in long_generator_function(parameter)
-            if x is not None
-        }
+            result = [
+               is_valid(metric={'key': value})
+               for value in interesting_iterable
+               if a_longer_filter_expression(value)
+            ]
    
-        return (x**2 for x in range(10))
+            descriptive_name = [
+               transform({'key': key, 'value': value}, color='black')
+               for key, value in generate_iterable(some_input)
+               if complicated_condition_is_met(key, value)
+            ]
+   
+            result = []
+            for x in range(10):
+              for y in range(5):
+                if x * y > 10:
+                  result.append((x, y))
+         
+            return {
+               x: complicated_transform(x)
+               for x in long_generator_function(parameter)
+               if x is not None
+           }
+   
+            return (x**2 for x in range(10))
       
-        unique_names = {user.name for user in users if user is not None}
-     ```
-       
+            unique_names = {user.name for user in users if user is not None}
+        ```
     *   **Bad:**
-     ```python
-      result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
+        ```python
+            result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
 
-      return (
-            (x, y, z)
-            for x in range(5)
-            for y in range(5)
-            if x != y
-            for z in range(5)
-            if y != z
-        )
-      ```
+            return (
+                  (x, y, z)
+                  for x in range(5)
+                  for y in range(5)
+                  if x != y
+                  for z in range(5)
+                  if y != z
+              )
+        ```
 
 *   **Default Iterators and Operators:** Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.
 
