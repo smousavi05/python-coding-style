@@ -304,7 +304,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
 
 *    **Comprehensions & Generator Expressions:** Okay to use for simple cases. List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, map(), filter(), or lambda.
     *   **Good:**
-       ```result = [mapping_expr for value in iterable if filter_expr]
+       ```python
+       result = [mapping_expr for value in iterable if filter_expr]
 
         result = [
          is_valid(metric={'key': value})
@@ -336,9 +337,10 @@ While specific rules can be subjective, this guide is based on widely accepted a
      ```
        
     *   **Bad:**
-      ```result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
+     ```python
+      result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
 
-        return (
+      return (
             (x, y, z)
             for x in range(5)
             for y in range(5)
@@ -351,13 +353,15 @@ While specific rules can be subjective, this guide is based on widely accepted a
 *   **Default Iterators and Operators:** Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.
 
     *   **Good:**
-         ```for key in adict: ...
+         ```python
+            for key in adict: ...
             if obj in alist: ...
             for line in afile: ...
             for k, v in adict.items(): ...
         ```    
     *   **Bad:**
-        ```for key in adict.keys(): ...
+        ```python
+           for key in adict.keys(): ...
            for line in afile.readlines(): ...
         ```
 
@@ -372,7 +376,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
       When handling integers, implicit false may involve more risk than benefit (i.e., accidentally handling None as 0). You may compare a value which is known to be an integer (and is not the result of len()) against the integer 0.
 
     *   **Good:**
-         ```if not users:
+         ```python
+            if not users:
                print('no users')
          
             if i % 10 == 0:
@@ -383,7 +388,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
                   x = []
         ```    
     *   **Bad:**
-        ```if len(users) == 0:
+        ```python
+           if len(users) == 0:
              print('no users')
       
            if not i % 10:
@@ -395,13 +401,15 @@ While specific rules can be subjective, this guide is based on widely accepted a
 
 *   **Logging:** For logging functions that expect a pattern-string (with %-placeholders) as their first argument: Always call them with a string literal (not an f-string!) as their first argument with pattern-parameters as subsequent arguments. Some logging implementations collect the unexpanded pattern-string as a queryable field. It also prevents spending time rendering a message that no logger is configured to output.
     *   **Good:** 
-        ```import tensorflow as tf
+        ```python
+           import tensorflow as tf
            logger = tf.get_logger()
            logger.info('TensorFlow Version is: %s', tf.__version__)
         ```
        
     *   **Good:**
-        ```import os
+        ```python
+           import os
            from absl import logging
          
            logging.info('Current $PAGER is: %s', os.getenv('PAGER', default=''))
@@ -412,7 +420,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
         ```
        
     *   **Bad:**
-        ```import os
+        ```python
+           import os
            from absl import logging
          
            logging.info('Current $PAGER is:')
@@ -432,7 +441,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
       They should allow simple automated processing (e.g. grepping).
        
     *   **Good:**
-        ```if not 0 <= p <= 1:
+        ```python
+           if not 0 <= p <= 1:
              raise ValueError(f'Not a probability: {p=}')
 
            try:
@@ -443,7 +453,8 @@ While specific rules can be subjective, this guide is based on widely accepted a
         ```
        
     *   **Bad:**
-        ```if p < 0 or p > 1:  # PROBLEM: also false for float('nan')!
+        ```python
+           if p < 0 or p > 1:  # PROBLEM: also false for float('nan')!
              raise ValueError(f'Not a probability: {p=}')
          
            try:
